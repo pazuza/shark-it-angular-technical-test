@@ -49,7 +49,7 @@ export class TasksComponent {
   ];
 
   public setDone(task: Task, $event: any): void {
-    this.tasks.find(() => task.status = $event.target.checked);
+    this.tasks.find(() => task.status = $event.target.checked ? TaskStatus.DONE : TaskStatus.BACKLOG);
   }
 
   public receiveEditedTask(task: Task): void {

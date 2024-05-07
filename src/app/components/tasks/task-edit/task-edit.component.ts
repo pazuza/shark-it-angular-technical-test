@@ -1,8 +1,8 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faPen } from '@fortawesome/free-solid-svg-icons';
 
-import { Task } from 'src/app/interfaces/task.interface';
+import { Task, TaskStatus } from 'src/app/interfaces/task.interface';
 
 @Component({
   selector: 'task-edit',
@@ -15,6 +15,7 @@ export class TaskEditComponent {
   @Input() public task: Task | undefined;
   @Output() description: EventEmitter<Task> = new EventEmitter();
 
+  public done: number = TaskStatus.DONE;
   public faPen = faPen;
 
   public saveTask(description: string, task: Task | null) {

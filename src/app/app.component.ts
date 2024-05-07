@@ -12,5 +12,5 @@ import { NavbarComponent } from './components/shared/navbar/navbar.component';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'Shark IT Angular Technical Test';
+  title = 'shark-it-angular-technical-test';
 }

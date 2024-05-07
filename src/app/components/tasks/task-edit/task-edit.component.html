@@ -1,4 +1,4 @@
-<button class="button is-dark">
+<button class="button is-dark" [disabled]="task?.status === done">
   <fa-icon [icon]="faPen" (click)="openModal()"></fa-icon>
 </button>
 
