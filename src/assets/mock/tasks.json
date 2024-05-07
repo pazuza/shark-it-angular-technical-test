@@ -1,0 +1,27 @@
+[
+  {
+    "id": "",
+    "description": "Lavar louça",
+    "status": 0
+  },
+  {
+    "id": "",
+    "description": "Ir no mercado",
+    "status": 0
+  },
+  {
+    "id": "",
+    "description": "Alimentar os gatos",
+    "status": 1
+  },
+  {
+    "id": "",
+    "description": "Lavar roupa",
+    "status": 1
+  },
+  {
+    "id": "",
+    "description": "Fazer comida",
+    "status": 1
+  }
+]

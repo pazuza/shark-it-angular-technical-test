@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { v4 as uuidv4 } from 'uuid';
 
 import { FooterComponent } from 'src/app/components/shared/footer/footer.component';
@@ -8,6 +8,7 @@ import { TaskCreateComponent } from 'src/app/components/tasks/task-create/task-c
 import { TaskDeleteComponent } from 'src/app/components/tasks/task-delete/task-delete.component';
 import { TaskEditComponent } from 'src/app/components/tasks/task-edit/task-edit.component';
 import { Task, TaskStatus } from 'src/app/interfaces/task.interface';
+import { TasksService } from 'src/app/services/tasks.service';
 
 @Component({
   selector: 'tasks',
@@ -16,51 +17,46 @@ import { Task, TaskStatus } from 'src/app/interfaces/task.interface';
   templateUrl: './tasks.component.html',
   styleUrl: './tasks.component.css'
 })
-export class TasksComponent {
+export class TasksComponent implements OnInit {
   public backlog: number = TaskStatus.BACKLOG;
   public done: number = TaskStatus.DONE;
 
-  public tasks: Array<Task> = [
-    {
-      id: uuidv4(),
-      description: 'Lavar louça',
-      status: TaskStatus.BACKLOG
-    },
-    {
-      id: uuidv4(),
-      description: 'Ir no mercado',
-      status: TaskStatus.BACKLOG
-    },
-    {
-      id: uuidv4(),
-      description: 'Alimentar os gatos',
-      status: TaskStatus.DONE
-    },
-    {
-      id: uuidv4(),
-      description: 'Lavar Roupa',
-      status: TaskStatus.DONE
-    },
-    {
-      id: uuidv4(),
-      description: 'Fazer comida',
-      status: TaskStatus.DONE
-    }
-  ];
+  public tasks: Array<Task> | undefined;
+
+  public constructor(private taskService: TasksService) { }
+
+  public ngOnInit(): void {
+    this.getTasks();
+  }
+
+  private getTasks() {
+    this.taskService.getTasks().subscribe({
+      next: (response: Array<Task>) => {
+        response.forEach(task => {
+          task.id = uuidv4();
+        });
+
+        this.tasks = response;
+      },
+      error: (error) => {
+        console.log(error);
+      }
+    });
+  }
 
   public setDone(task: Task, $event: any): void {
-    this.tasks.find(() => task.status = $event.target.checked ? TaskStatus.DONE : TaskStatus.BACKLOG);
+    this.tasks?.find(() => task.status = $event.target.checked ? TaskStatus.DONE : TaskStatus.BACKLOG);
   }
 
   public receiveEditedTask(task: Task): void {
-    const taskIndex: number = this.tasks.findIndex((taskItem) => task.id === taskItem.id);
+    const taskIndex: number | undefined = this.tasks?.findIndex((taskItem) => task.id === taskItem.id);
 
-    if (taskIndex !== -1) this.tasks[taskIndex] = task;
+    if (this.tasks && this.tasks?.length > 0 && taskIndex && taskIndex !== -1) this.tasks[taskIndex] = task;
   }
 
   public receiveDeletedTask(task: Task): void {
-    const taskIndex: number = this.tasks.findIndex((taskItem) => task.id === taskItem.id);
+    const taskIndex: number | undefined = this.tasks?.findIndex((taskItem) => task.id === taskItem.id);
 
-    if (taskIndex !== -1) this.tasks.splice(taskIndex, 1);
+    if (this.tasks && this.tasks?.length > 0 && taskIndex && taskIndex !== -1) this.tasks?.splice(taskIndex, 1);
   }
 }

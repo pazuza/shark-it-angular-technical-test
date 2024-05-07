@@ -29,6 +29,8 @@ export class TaskEditComponent {
   }
 
   public openModal() {
+    if (this.task?.status === this.done) return;
+
     document.getElementById('edit-modal')?.classList.add('is-active');
   }
 
