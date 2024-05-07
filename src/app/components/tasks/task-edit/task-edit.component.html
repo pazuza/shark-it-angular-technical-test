@@ -1,0 +1,39 @@
+<button class="button is-dark">
+  <fa-icon [icon]="faPen" (click)="openModal()"></fa-icon>
+</button>
+
+@if(task) {
+  <div class="modal" id="edit-modal">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+      <header class="modal-card-head">
+        <p class="modal-card-title">Editar Tarefa</p>
+        <button
+          class="delete"
+          aria-label="close"
+          (click)="closeModal()"
+        ></button>
+      </header>
+      <section class="modal-card-body">
+        <textarea
+          class="textarea"
+          [placeholder]="task.description"
+          #descriptionInput
+        ></textarea>
+      </section>
+      <footer class="modal-card-foot">
+        <div class="buttons">
+          <button
+            class="button is-success"
+            (click)="saveTask(descriptionInput.value, task)"
+          >
+            Salvar alterações
+          </button>
+          <button class="button" (click)="closeModal()">
+            Cancelar
+          </button>
+        </div>
+      </footer>
+    </div>
+  </div>
+}

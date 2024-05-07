@@ -1,0 +1,29 @@
+<app-navbar></app-navbar>
+
+<section class="hero is-fullheight is-warning">
+  <div class="hero-body">
+    <div class="container subtitle is-flex is-flex-direction-column">
+      @for(task of tasks; track task) {
+      <div class="container is-align-items-center is-flex is-flex-direction-row mb-5">
+        <label class="checkbox is-flex is-flex-direction-row">
+          <input
+            type="checkbox"
+            [checked]="task.status === done"
+            (click)="setDone(task, $event)"
+          />
+          <p
+            class="is-flex is-flex-direction-row ml-2"
+            [ngClass]="{ 'task-done': task.status === done }"
+          >
+            {{ task.description }}
+          </p>
+        </label>
+        <task-edit class="ml-3" [task]="task" (description)="receiveEditedTask($event)"></task-edit>
+        <task-delete class="ml-3" [task]="task" (delete)="receiveDeletedTask($event)"></task-delete>
+      </div>
+      }
+    </div>
+  </div>
+</section>
+
+<app-footer></app-footer>

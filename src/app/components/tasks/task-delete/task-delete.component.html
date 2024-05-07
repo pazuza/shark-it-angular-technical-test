@@ -1,0 +1,37 @@
+<button class="button is-dark">
+  <fa-icon [icon]="faTrash" (click)="openModal()"></fa-icon>
+</button>
+
+@if(task) {
+<div class="modal" id="delete-modal">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">Deletar Tarefa</p>
+      <button
+        class="delete"
+        aria-label="close"
+        (click)="closeModal(); setTaskNull()"
+      ></button>
+    </header>
+    <section class="modal-card-body">
+      <div class="content">
+        <p class="has-text-white">
+          Tem certeza que deseja deletar a tarefa:
+          <strong class="has-text-white">"{{ task.description }}"</strong>?
+        </p>
+      </div>
+    </section>
+    <footer class="modal-card-foot">
+      <div class="buttons">
+        <button class="button is-success" (click)="deleteTask(task)">
+          Deletar Tarefa
+        </button>
+        <button class="button" (click)="closeModal(); setTaskNull()">
+          Cancelar
+        </button>
+      </div>
+    </footer>
+  </div>
+</div>
+}
