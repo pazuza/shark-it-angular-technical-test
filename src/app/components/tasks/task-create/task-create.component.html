@@ -1,1 +1,35 @@
-<button class="button is-success">Nova Tarefa</button>
+<button class="button is-success" (click)="openModal()">Nova Tarefa</button>
+
+
+<div class="modal" id="create-modal">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">Criar Tarefa</p>
+      <button
+        class="delete"
+        aria-label="close"
+        (click)="closeModal()"
+      ></button>
+    </header>
+    <section class="modal-card-body">
+      <textarea
+        class="textarea"
+        #createTaskDescriptionInput
+      ></textarea>
+    </section>
+    <footer class="modal-card-foot">
+      <div class="buttons">
+        <button
+          class="button is-success"
+          (click)="createTask(createTaskDescriptionInput.value)"
+        >
+          Criar Nova Tarefa
+        </button>
+        <button class="button" (click)="closeModal()">
+          Cancelar
+        </button>
+      </div>
+    </footer>
+  </div>
+</div>

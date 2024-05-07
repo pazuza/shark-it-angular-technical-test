@@ -36,7 +36,7 @@
     <div class="navbar-end">
       <div class="navbar-item">
         <div class="buttons">
-          <task-create></task-create>
+          <task-create (create)="receiveNewTask($event)"></task-create>
         </div>
       </div>
     </div>

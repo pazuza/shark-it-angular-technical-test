@@ -48,6 +48,14 @@ export class TasksComponent implements OnInit {
     this.tasks?.find(() => task.status = $event.target.checked ? TaskStatus.DONE : TaskStatus.BACKLOG);
   }
 
+  public receiveNewTask(description: string): void {
+    this.tasks?.push({
+      id: uuidv4(),
+      description,
+      status: TaskStatus.BACKLOG
+    });
+  }
+
   public receiveEditedTask(task: Task): void {
     const taskIndex: number | undefined = this.tasks?.findIndex((taskItem) => task.id === taskItem.id);
 

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 import { TaskCreateComponent } from 'src/app/components/tasks/task-create/task-create.component';
 
@@ -10,5 +10,9 @@ import { TaskCreateComponent } from 'src/app/components/tasks/task-create/task-c
   styleUrl: './navbar.component.css'
 })
 export class NavbarComponent {
+  @Output() newTaskDescription: EventEmitter<string> = new EventEmitter();
 
+  public receiveNewTask(description: string): void {
+    this.newTaskDescription.emit(description);
+  }
 }
